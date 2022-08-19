@@ -61,6 +61,18 @@ class TodoController {
       console.log(e);
     }
   };
+ //UPDATE TODO
+ static updateTodo = async (req, res) => {
+    try {
+      const todo = await todoModel.findByIdAndUpdate(req.params.id, req.body);
+      res.status(200).json({
+        success: true,
+        todo,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 }
 

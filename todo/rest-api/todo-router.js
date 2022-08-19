@@ -7,8 +7,9 @@ class TodoRouter {
     //console.log("Shubham");
 
     router.post("/", TodoController.createTodo);
-    router.get("/:id",TodoController.getTodo)
-    router.delete("/:id",TodoController.deleteTodo)
+    router.get("/:id",TodoController.getTodo);
+    router.delete("/:id",TodoController.deleteTodo);
+    router.patch("/:id",TodoController.updateTodo);
     return router;
   }
 }
