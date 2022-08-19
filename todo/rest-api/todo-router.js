@@ -4,10 +4,11 @@ const router = express.Router();
 
 class TodoRouter {
   static getRoutes() {
-    console.log("Shubham");
+    //console.log("Shubham");
 
     router.post("/", TodoController.createTodo);
     router.get("/:id",TodoController.getTodo)
+    router.delete("/:id",TodoController.deleteTodo)
     return router;
   }
 }
