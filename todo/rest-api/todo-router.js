@@ -7,7 +7,7 @@ class TodoRouter {
     console.log("Shubham");
 
     router.post("/", TodoController.createTodo);
-
+    router.get("/:id",TodoController.getTodo)
     return router;
   }
 }
