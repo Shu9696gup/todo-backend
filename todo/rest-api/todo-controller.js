@@ -61,6 +61,7 @@ class TodoController {
       console.log(e);
     }
   };
+  
  //UPDATE TODO
  static updateTodo = async (req, res) => {
     try {
@@ -68,6 +69,19 @@ class TodoController {
       res.status(200).json({
         success: true,
         todo,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+   //GET ALL TODO
+   static getAllTodos = async (req, res) => {
+    try {
+      const todos = await todoModel.find();
+      res.status(200).json({
+        success: true,
+        todos,
       });
     } catch (e) {
       console.log(e);

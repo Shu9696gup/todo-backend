@@ -10,6 +10,7 @@ class TodoRouter {
     router.get("/:id",TodoController.getTodo);
     router.delete("/:id",TodoController.deleteTodo);
     router.patch("/:id",TodoController.updateTodo);
+    router.get("/",TodoController.getAllTodos)
     return router;
   }
 }
