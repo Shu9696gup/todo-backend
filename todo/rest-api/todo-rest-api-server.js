@@ -1,27 +1,29 @@
 const express = require("express");
-const dbConnect = require("../internal/todo-repository");
-const todoRouter = require("./todo-router");
+const TodoRepository = require("../internal/todo-repository");
+const TodoRouter = require("./todo-router");
 const app = express();
+const bodyParser = require("body-parser")
 
-const createdb = async () => {
-  await dbConnect();
-  app.use(express.json());
+// const createdb = async () => {
+//   await dbConnect();
+//   app.use(express.json());
 
-  app.use("/todo", todoRouter);
-};
+//   app.use("/todo", todoRouter);
+// };
 
-module.exports = createdb;
+// module.exports = createdb;
 
-// export default class TodoRESTApiServer {
-//      static async create(){
-//       await TodoRepository.createDBConnection();
+class TodoRESTAPIServer {
+     static async create(){
+      await TodoRepository.createDBConnect();
   
-//       const app = express();
-//       app.use(bodyParser.json());
-  
-//       app.use('/todo', TodoRouter.getRoutes());
-  
-  
-//       return Promise.resolve(app);
-//     }
-//   }
+      const app = express();
+      app.use(bodyParser.json());
+        
+      app.use('/todo', TodoRouter.getRoutes());
+      
+  return app;
+      
+    }
+  }
+  module.exports = TodoRESTAPIServer;

@@ -1,15 +1,59 @@
 const express = require("express");
+const dotenv = require("dotenv")
+const TodoServiceManager = require("./todo/todo-service-manager");
 
-const createdb = require("./todo/rest-api/todo-rest-api-server");
-const todoRouter = require("./todo/rest-api/todo-router");
-const todoManeger = require("./todo/todo-service-maneger");
-const app = express();
+dotenv.config({path:"config/config.env"})
 
-//app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.json());
+class App {
+ 
+  static async startServer() {
+    this.app = express();
+    const restAPIServices = await this.createRESTApiServer();
+    //console.log(restAPIServices);
+    this.app.use("/api", restAPIServices);
+    //console.log("shu")
+    //const port = process.env.PORT;
+    //console.log(port)
+    const server = this.app.listen(process.env.PORT);
+    //console.log(server);
+    return server;
+  }
 
-// app.use("/todo",todoRouter);
-//createdb();
-todoManeger();
+  static async createRESTApiServer(){
+    const app = express();
+    
+    const todoServiceRESTApi = await TodoServiceManager.createRestAPIServer();
+    app.use('/', todoServiceRESTApi);
+    
+    return app;
+  }
 
-module.exports = app;
+}
+
+module.exports = App;
+
+// export default class App {
+//      static app;
+
+//      static async startServer(){
+//       this.app = express();
+
+//       const restAPIServices = await this.createRESTApiServer();
+//       this.app.use('/api', restAPIServices);
+
+//       const port = ConfigService.getStringValue('server.port');
+//       const server = this.app.listen(port);
+
+//       return server;
+//     }
+
+//     static async createRESTApiServer() {
+//       const app = express();
+
+//       const taskServiceRESTApi = await TaskServiceManager.createRestAPIServer();
+//       app.use('/', taskServiceRESTApi);
+
+//       return app;
+//     }
+
+//   }

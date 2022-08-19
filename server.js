@@ -1,13 +1,20 @@
-const app = require("./app");
-const dbConnect = require("./todo/internal/todo-repository");
-const dotenv = require("dotenv");
-//CONFIG
-dotenv.config({path:"config/config.env"})
+const App = require("./app");
+
 
 
 //DATABASE CONECTION
 // dbConnect();
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server is listening on ${process.env.PORT}`)
-})
+// app.listen(process.env.PORT,()=>{
+//     console.log(`server is listening on ${process.env.PORT}`)
+// })
+(() => {
+    App.startServer().then(
+      () => {console.log("Server is running")},
+      (e) => {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        
+      },
+    );
+  })();
